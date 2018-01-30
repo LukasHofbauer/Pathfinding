@@ -33,12 +33,12 @@ dijkstra = function() {
 
   this.returnPath = function() {
     var pathNode = current;
-    path.push(pathNode);
-    while (pathNode.node != start) {
-      path.push(pathNode.connection);
-      pathNode=pathNode.connection;
+    path.push(pathNode); //adds current to path
+    while (pathNode.node != start) { //repeats until start is reached
+      path.push(pathNode.connection); //adds connection
+      pathNode=pathNode.connection; //sets connection as current
       }
-    console.log(path);
+    console.log(path); //puts out path
   }
 
   this.iterate = function() {
@@ -47,9 +47,9 @@ dijkstra = function() {
       this.remove();     //removes current from open and puts it in closed
 
       if (current.node == end){		//checks if the end was found
-          console.log("Done!")
+          done = "solution";
+          console.log(done);
           this.returnPath();
-          done = true;
           p = new showPath(path);
       }else{
         connections = graph[current.node];        //array of the connections to the current Node
@@ -68,9 +68,10 @@ dijkstra = function() {
           }
         }
 
-    } else if (openSet.length == 0){	//in this case there is no solution
-      dijkstra = false;
-      console.log("no solution");
-	    }
     }
+    else if (openSet.length == 0 && done == false){	//in this case there is no solution
+      done = "no solution";
+      console.log(done);
+	  }
+  }
 }

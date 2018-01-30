@@ -1,5 +1,3 @@
-var d;
-
 setupAlgorithm = function() {
   var StartRecord = new NodeRecord(start, null, 0);
   path = [];

@@ -17,17 +17,16 @@ var end = 224;
 var astar = false;
 var dijkstra = false;
 var done = false;
-var astr;
-var d;
-var p;
-var alg;
+var astr; //obj for astar alg
+var d; //obj for dijkstra alg
+var p; //obj for path
+var alg; //obj for alg setup
 
 
 
 function startGame() {
     PathfindingArea.start();
     alg = new setupAlgorithm();
-    console.log(alg);
     var h = 0;
     for (j = 0; j < rows; j++){
         for (i = 0; i < cols; i++){
@@ -41,7 +40,6 @@ function startGame() {
           }
         }
     }
-    console.log(cells)
     createGraph();
 }
 
@@ -165,7 +163,6 @@ function connection(cost, fromNode, toNode){
 function PathfindingUpdate() {
     PathfindingArea.clear();
     if (dijkstra == true){
-      console.log("hi")
       d.iterate();
     }else if(astar == true){
       astr.iterate();
@@ -185,7 +182,7 @@ function PathfindingUpdate() {
     ctx.strokeRect(cells[end].x+4, cells[end].y+4, cellwidth-8, cellheight-8);
 
 
-    if (done == true) {
+    if (done == "solution") {
       p.draw();
     }
 }
