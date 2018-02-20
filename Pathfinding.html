@@ -9,16 +9,133 @@
 
 <style>
 canvas {
-    border:1px solid #d3d3d3;
     background-color: #f1f1f1;
+    float: left;
+    float: left;  border: -1px solid #000000;
+    border-radius: 5px;
+    padding: 4px;
+}
+.box{
+float: left; width:250px;  border: 1px solid #000000;
+border-radius: 5px;
+
+}
+.button{
+  background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    width:249px;
+}
+.slider {
+    -webkit-appearance: none;
+    width: 244px;
+    height: 10px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
 }
 </style>
 </head>
-<body onload="startGame()">
-<button onclick="startDijkstra()">Dijkstra</button>
-<button onclick="startAStar()">A*</button>
-<input id="start" type="text" value="0" />
+<body onload="startSetup()">
+  <div class="box">
+    <div class="box" style="right:20px; top:20px; height: 150px;">
+      <button class="button" onclick="startDijkstra()">Dijkstra</button>
+      <div style="margin-top: 15px;">
+        <span style="margin-left: 5px;"  id="dp"></span> <br>
+        <span style="margin-left: 5px;"  id="dk"></span> <br>
+        <span style="margin-left: 5px;"  id="dg"></span> <br>
+        <span style="margin-left: 5px;"  id="do"></span>
+      </div>
+    </div>
 
+    <div class="box" style="right:20px; top:200px; height: 190px;">
+      <button class="button" onclick="startAStar()">A*</button>
+
+      <div class="slidecontainer" style="margin=4px">
+            <span style="margin-left: 5px;">Multiplikationsfaktor der Heuristik:</span>
+            <span id="f">1</span>
+        <input type="range" min="1" max="5" value="1" class="slider" id="slider">
+      </div>
+      <div style="margin-top: 15px;">
+        <span style="margin-left: 5px;"  id="ap"></span> <br>
+        <span style="margin-left: 5px;"  id="ak"></span> <br>
+        <span style="margin-left: 5px;"  id="ag"></span> <br>
+        <span style="margin-left: 5px;"  id="ao"></span>
+      </div>
+    </div>
+    <div class="box" style="right:20px;">
+      <span style="margin-left: 5px;"  id="sp"></span> <br>
+      <input type="range" min="1" max="300" value="1" class="slider" id="speed">
+    </div>
+    <div class="box" style="right:20px; top:200px;  ">
+      <p style="margin-left: 5px; margin-right: 5px;">Um einen der beiden Algorithmen zu starten m&uuml;ssen Sie auf das entsprechende gr&uuml;ne Feld klicken.
+        Die Animation kann unter dem Reiter Geschwindigkeit verlangsamt werden.<br>
+        F&uuml;r den A* Algorithmus kann die Heuristik mit einem Faktor multipliziert werden,
+        um eine &uuml;berschreitende Heuristik zu erzeugen. <br>
+        Weitere Informationen k&ouml;nnen in der Konsole - zum &Ouml;ffnen F12 bet&auml;tigen - gefunden werden.<br>
+		Zum erneuten Starten die Seite neu laden bzw. F5 dr&uuml;cken.</p>
+    </div>
+  </div>
+
+
+<script>
+var dpfad = document.getElementById('dp');
+var dknoten = document.getElementById('dk');
+var dgeschlossen = document.getElementById('dg');
+var doffen = document.getElementById('do');
+
+var apfad = document.getElementById('ap');
+var aknoten = document.getElementById('ak');
+var ageschlossen = document.getElementById('ag');
+var aoffen = document.getElementById('ao');
+
+var slider = document.getElementById("slider");
+var speed = document.getElementById("speed");
+var sp = document.getElementById("sp");
+var y = document.getElementById('f');
+y.innerHTML = slider.value;
+sp.innerHTML = "Geschwindigkeit: 1ms";
+slider.oninput = function(){
+  y.innerHTML = this.value;
+}
+speed.oninput = function(){
+  spd = this.value;
+  sp.innerHTML = "Geschwindigkeit: " + speed.value + "ms";
+  window.clearInterval(int);
+  int = setInterval(PathfindingUpdate, spd);
+}
+</script>
 
 </body>
 </html>

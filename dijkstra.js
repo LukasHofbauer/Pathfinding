@@ -39,6 +39,10 @@ dijkstra = function() {
       pathNode=pathNode.connection; //sets connection as current
       }
     console.log(path); //puts out path
+    dpfad.innerHTML = "Pfadl&auml;nge: " + Math.round(path[0].costSoFar * 100) / 100;
+    dknoten.innerHTML = "Knoten im Pfad: " + path.length;
+    dgeschlossen.innerHTML = "Geschlossene Knoten: " + closedSet.length;
+    doffen.innerHTML = "Offene Knoten: " + openSet.length;
   }
 
   this.iterate = function() {

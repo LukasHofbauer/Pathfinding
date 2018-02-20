@@ -1,5 +1,6 @@
 astar = function() {
-
+  var slider = document.getElementById("slider");
+  var slidervalue = slider.value
   this.smallestNode = function() {
     current = openSet[0];   //sets first entry of open set to current
     for (j = 0; j < openSet.length; j++){
@@ -16,7 +17,7 @@ astar = function() {
 	  bb = Math.sqrt(b*b); //value of b
 	  heuristic = 0; //heuristic starts at 0
 	  //heuristic = Math.sqrt(a*a+b*b)
-	 
+
 	  while (aa >0 && bb > 0){ //while there is vertical and horizontal dist between them
 		    aa-- //remove 1 from horizontal distance
 		    bb-- //remove 1 from vertical distance
@@ -30,8 +31,8 @@ astar = function() {
 		    bb-- //remove 1 from vertical distance
         heuristic += 1; //add 1 to the heuristic
 	  }
-	  
-	  heuristic = heuristic*2;
+
+	  heuristic = heuristic*slidervalue;
   }
 
   this.setCheck = function(){
@@ -86,6 +87,10 @@ astar = function() {
       pathNode=pathNode.connection;
       }
     console.log(path);
+    apfad.innerHTML = "Pfadl&auml;nge: " +  Math.round(path[0].costSoFar * 100) / 100;
+    aknoten.innerHTML = "Knoten im Pfad: " + path.length;
+    ageschlossen.innerHTML = "Geschlossene Knoten: " + closedSet.length;
+    aoffen.innerHTML = "Offene Knoten: " + openSet.length;
   }
 
   this.iterate = function() {

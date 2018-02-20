@@ -1,11 +1,13 @@
 var cols =15;
 var rows =15;
-
-canvaswidth  = 800;
-canvasheight = 800;
+var int
+var canvaswidth  = 700;
+var canvasheight = 700;
 
 var cellwidth = canvaswidth/cols;
 var cellheight = canvasheight/rows;
+
+var fontsize = cellheight/2.6;
 
 var cells = [];
 var graph = [];
@@ -24,7 +26,7 @@ var alg; //obj for alg setup
 
 
 
-function startGame() {
+function startSetup() {
     PathfindingArea.start();
     alg = new setupAlgorithm();
     var h = 0;
@@ -52,7 +54,8 @@ var PathfindingArea = {
         this.canvas.height = canvasheight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.interval = setInterval(PathfindingUpdate, 10);
+        int = setInterval(PathfindingUpdate, 1);
+        //setTimeout(PathfindingUpdate, 1);
     },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -78,23 +81,23 @@ function cell(i, j, wall){
         ctx.fillStyle="#BBBBBB";
         ctx.fillRect(this.x, this.y, cellwidth, cellheight);
         ctx.fillStyle="#000000";
-        ctx.font = "20px Arial";
+        ctx.font = fontsize +  "px Arial";
         ctx.fillText(this.spot,this.x+5,this.y+20);
       }else if(this.set == "closed"){
         ctx.fillStyle="#444444";
         ctx.fillRect(this.x, this.y, cellwidth, cellheight);
         ctx.fillStyle="#FFFFFF";
-        ctx.font = "20px Arial";
+        ctx.font = fontsize +  "px Arial";
         ctx.fillText(this.spot,this.x+5,this.y+20);
       }else if(this.wall == true){
         ctx.fillStyle="#000000";
         ctx.fillRect(this.x, this.y, cellwidth, cellheight);
         ctx.fillStyle="#FFFFFF";
-        ctx.font = "20px Arial";
+        ctx.font = fontsize +  "px Arial";
         ctx.fillText(this.spot,this.x+5,this.y+20);
       }else{
         ctx.fillStyle="#000000";
-        ctx.font = "20px Arial";
+        ctx.font = fontsize +  "px Arial";
         ctx.fillText(this.spot,this.x+5,this.y+20);
       }
       ctx.strokeStyle="#000000";
@@ -185,4 +188,5 @@ function PathfindingUpdate() {
     if (done == "solution") {
       p.draw();
     }
+    //setTimeout(PathfindingUpdate, speed);
 }
