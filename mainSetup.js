@@ -22,13 +22,11 @@ var done = false;
 var astr; //obj for astar alg
 var d; //obj for dijkstra alg
 var p; //obj for path
-var alg; //obj for alg setup
 
 
 
 function startSetup() {
     PathfindingArea.start();
-    alg = new setupAlgorithm();
     var h = 0;
     for (j = 0; j < rows; j++){
         for (i = 0; i < cols; i++){

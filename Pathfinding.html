@@ -69,9 +69,9 @@ border-radius: 5px;
 </head>
 <body onload="startSetup()">
   <div class="box">
-    <div class="box" style="right:20px; top:20px; height: 150px;">
+    <div class="box" style="right:20px; top:20px; height: 130px;">
       <button class="button" onclick="startDijkstra()">Dijkstra</button>
-      <div style="margin-top: 15px;">
+      <div style="margin-top: 5px;">
         <span style="margin-left: 5px;"  id="dp"></span> <br>
         <span style="margin-left: 5px;"  id="dk"></span> <br>
         <span style="margin-left: 5px;"  id="dg"></span> <br>
@@ -79,7 +79,7 @@ border-radius: 5px;
       </div>
     </div>
 
-    <div class="box" style="right:20px; top:200px; height: 190px;">
+    <div class="box" style="right:20px; top:200px; height: 170px;">
       <button class="button" onclick="startAStar()">A*</button>
 
       <div class="slidecontainer" style="margin=4px">
@@ -87,7 +87,7 @@ border-radius: 5px;
             <span id="f">1</span>
         <input type="range" min="1" max="5" value="1" class="slider" id="slider">
       </div>
-      <div style="margin-top: 15px;">
+      <div style="margin-top: 5px;">
         <span style="margin-left: 5px;"  id="ap"></span> <br>
         <span style="margin-left: 5px;"  id="ak"></span> <br>
         <span style="margin-left: 5px;"  id="ag"></span> <br>
@@ -105,6 +105,14 @@ border-radius: 5px;
         um eine &uuml;berschreitende Heuristik zu erzeugen. <br>
         Weitere Informationen k&ouml;nnen in der Konsole - zum &Ouml;ffnen F12 bet&auml;tigen - gefunden werden.<br>
 		Zum erneuten Starten die Seite neu laden bzw. F5 dr&uuml;cken.</p>
+    </div>
+    <div class="box">
+      <div>
+        <span style="margin-left: 5px; ">Startknoten: </span> <input id="start" style="position: relative; left: 25px; "type="number" min="0" max="224" step="1" value="0">
+      </div>
+      <div>
+        <span style="margin-left: 5px; ">Zielknoten: </span> <input id="ziel" style="position: relative; left: 29px;" type="number" min="0" max="224" step="1" value="224">
+      </div>
     </div>
   </div>
 
@@ -124,10 +132,22 @@ var slider = document.getElementById("slider");
 var speed = document.getElementById("speed");
 var sp = document.getElementById("sp");
 var y = document.getElementById('f');
+var strt = document.getElementById('start');
+var ziel = document.getElementById('ziel');
+
 y.innerHTML = slider.value;
 sp.innerHTML = "Geschwindigkeit: 1ms";
 slider.oninput = function(){
   y.innerHTML = this.value;
+}
+start = strt.value;
+end = ziel.value;
+
+strt.oninput = function () {
+  start = this.value;
+}
+ziel.oninput = function () {
+  end = this.value;
 }
 speed.oninput = function(){
   spd = this.value;

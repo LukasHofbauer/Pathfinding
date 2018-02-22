@@ -7,7 +7,6 @@ setupAlgorithm = function() {
 }
 
 
-
 function NodeRecord(node, connection, costSoFar, heuristic){
 this.node = node;
 this.connection = connection;
@@ -16,14 +15,16 @@ this.heuristic = heuristic;
 }
 
 startDijkstra = function(){
+  setupAlgorithm();
   d = new dijkstra();
   dijkstra = true;
 
 }
 
 startAStar = function(){
-    astr = new astar();
-    astar = true;
+  setupAlgorithm();
+  astr = new astar();
+  astar = true;
 }
 
 function showPath(path) {
